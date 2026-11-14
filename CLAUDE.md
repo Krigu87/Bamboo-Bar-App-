@@ -143,6 +143,24 @@ Quellen: [Supabase: Project Pausing](https://supabase.com/docs/guides/platform/f
 - Geburtstage von Nicht-Mitgliedern bei Bedarf als normalen jährlichen Termin eintragen.
 - Kommt in Etappe 1.
 
+## Stand der Umsetzung
+
+**Etappe 1 ist gebaut** (14.11.2026) und lokal getestet, aber noch nicht bei Supabase und GitHub Pages eingerichtet (siehe EINRICHTUNG.md).
+
+Vorläufige Annahmen von Claude, mit Krigu noch zu bestätigen:
+- Anleitungen dürfen alle Mitglieder und der Admin anlegen und bearbeiten. Die Band liest nur.
+- Fotos der Anleitungen liegen in einem öffentlich lesbaren Speicher (wer die genaue Bildadresse kennt, kann das Bild sehen). Für private Fotos (Etappe 2) braucht es einen geschützten Speicher.
+- Einkaufsliste: alle aktiven Nutzer dürfen alles (eintragen, abhaken, löschen).
+- Reservierungen und Verfügbarkeiten bearbeitet nur, wer sie eingetragen hat, plus der Admin.
+- „Entfernen“ eines Nutzers deaktiviert ihn nur (rückgängig machbar), sein Konto bleibt bestehen.
+- Die interne Ersatz-Adresse für den Login ist `name@bamboo-bar.invalid`. Lokal funktioniert sie. Ob Supabase online sie annimmt, zeigt sich bei der ersten Registrierung.
+
+Technische Hinweise für spätere Sitzungen:
+- Die App hat keinen Build-Schritt. `app/vendor/supabase.js` ist eine Kopie aus `node_modules` (`npm run vendor`).
+- Bei Änderungen an App-Dateien `VERSION` in `app/sw.js` erhöhen, damit Handys die neue Version laden.
+- Lokales Testen: siehe README. In `supabase/config.toml` muss `[auth.email] enable_signup = true` bleiben, sonst ist der Login ganz aus. Die offene Registrierung ist über `[auth] enable_signup = false` gesperrt.
+- Die Edge Functions sind absichtlich je eine einzelne Datei ohne Zusatzpakete, damit Krigu sie im Supabase-Dashboard einfügen kann. „Verify JWT“ muss dort aus sein.
+
 ## Offene Fragen
 
 Diese Punkte sind noch nicht entschieden. Claude Code soll sie bei der jeweiligen Etappe nachfragen und nicht selbst festlegen.

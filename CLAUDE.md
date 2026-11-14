@@ -116,6 +116,8 @@ Quellen: [Supabase: Project Pausing](https://supabase.com/docs/guides/platform/f
 
 **Login**
 - Zugang nur über einen Einladungslink, den Krigu in der App erstellt. Die Rolle (Mitglied oder Band) wird beim Erstellen der Einladung festgelegt.
+- Es gibt zwei Gruppenlinks: einen für Mitglieder und einen für die Band. Sie sind mehrfach nutzbar und dauerhaft gültig, wie bei Krigus anderen Apps. Krigu kann einen Link in der App jederzeit erneuern. Danach funktioniert der alte Link nicht mehr.
+- Der Mitglieder-Link kommt in den WhatsApp-Gruppenchat. Den Band-Link schickt das Mitglied weiter, das den Kontakt zur Band hält (der „Präsident“). Krigu hat keine Nummern der Bandmitglieder.
 - Wer den Link öffnet, wählt einmal einen Namen und ein eigenes Passwort.
 - Danach bleibt man auf dem Gerät angemeldet (wie bei WhatsApp).
 - Passwort vergessen: Krigu setzt es in der App auf ein vorläufiges Passwort zurück und sagt es der Person. Beim nächsten Login wählt sie ein neues.
@@ -137,6 +139,7 @@ Quellen: [Supabase: Project Pausing](https://supabase.com/docs/guides/platform/f
 **Geburtstage**
 - Jeder trägt sein Geburtsdatum freiwillig im Profil ein, auf Wunsch ohne Jahrgang.
 - Der Kalender zeigt Geburtstage jedes Jahr automatisch an, damit man gratulieren kann.
+- Die Band darf ihre Geburtstage ebenfalls eintragen und sieht alle Geburtstage.
 - Geburtstage von Nicht-Mitgliedern bei Bedarf als normalen jährlichen Termin eintragen.
 - Kommt in Etappe 1.
 
@@ -147,8 +150,8 @@ Diese Punkte sind noch nicht entschieden. Claude Code soll sie bei der jeweilige
 - [x] Wer aus der Band trägt die Probetermine ein? → alle aus der Band
 - [x] Gibt es neben Krigu weitere Admins? → nein
 - [x] Login-Art? → Name und eigenes Passwort, siehe „Entscheidungen“
-- [ ] Einladungslinks: ein Link pro Person oder ein Gruppenlink pro Rolle (mehrfach nutzbar, läuft nach einigen Tagen ab)?
-- [ ] Geburtstage: Sieht die Band die Geburtstage der Mitglieder, und tragen Bandmitglieder ihren eigenen ein?
+- [x] Einladungslinks? → ein dauerhafter Gruppenlink pro Rolle, siehe „Entscheidungen“
+- [x] Geburtstage und Band? → Band trägt ein und sieht alle
 - [ ] Finanzen: Beträge, Währung, wer darf Einträge machen?
 - [ ] Logo festlegen. Krigu reicht ein besseres Foto vom Schild nach (frontal, in Farbe, Raumlicht aus).
 - [ ] Brett- und Kartenspiele erfassen (macht Krigu)

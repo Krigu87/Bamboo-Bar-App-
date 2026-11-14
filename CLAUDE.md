@@ -49,6 +49,7 @@ Gebaut wird in drei Etappen. Zuerst kommt, was den WhatsApp-Chat im Alltag erset
 4. Verfügbarkeit: Jedes Mitglied markiert beliebig weit im Voraus, wann es Zeit hätte. Der Kalender zeigt pro Tag eine Zahl wie „4 von 7 können“.
 5. Einkaufsliste: Fehlendes eintragen (z. B. Cola), jemand tippt „Ich bring’s mit“, danach wird es abgehakt
 6. Anleitungen: Schritt für Schritt mit Fotos, z. B. Licht einschalten oder Musikanlage bedienen
+7. Geburtstage: freiwillig im Profil eintragen, erscheinen jedes Jahr automatisch im Kalender (Details unter „Entscheidungen“)
 
 **Etappe 2 – Gemeinschaft**
 
@@ -108,13 +109,46 @@ Wichtige Fallstricke:
 
 Quellen: [Supabase: Project Pausing](https://supabase.com/docs/guides/platform/free-project-pausing.md) · [Supabase-Gratis-Limits 2026](https://automationatlas.io/answers/supabase-free-tier-limits-2026/) · [GitHub Docs: Workflows deaktivieren](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/disable-and-enable-workflows)
 
+## Entscheidungen (Stand 14.11.2026, von Krigu bestätigt)
+
+**Admin**
+- Krigu ist der einzige Admin.
+
+**Login**
+- Zugang nur über einen Einladungslink, den Krigu in der App erstellt. Die Rolle (Mitglied oder Band) wird beim Erstellen der Einladung festgelegt.
+- Wer den Link öffnet, wählt einmal einen Namen und ein eigenes Passwort.
+- Danach bleibt man auf dem Gerät angemeldet (wie bei WhatsApp).
+- Passwort vergessen: Krigu setzt es in der App auf ein vorläufiges Passwort zurück und sagt es der Person. Beim nächsten Login wählt sie ein neues.
+- Keine E-Mails: Supabase kennt nur Login per E-Mail, darum macht die App aus dem Namen intern eine Ersatz-Adresse (z. B. `name@bamboo-bar.invalid`). Nutzer sehen davon nichts. Beim Bauen zuerst testen, ob Supabase das ohne Probleme annimmt.
+- Konten werden über eine Supabase Edge Function angelegt (nur dort liegt der service_role-Schlüssel). Öffentliche Registrierung in Supabase ausschalten. Für das Zurücksetzen von Passwörtern ebenfalls eine Edge Function, die prüft, ob der Aufrufer Admin ist.
+- Krigu ist es egal, wenn ein Link im Gruppenchat landet und Ehemalige ihn sehen. Es sind Freunde, und Krigu kann unerwünschte Konten in der App wieder entfernen.
+
+**Band-Termine und Rechte im Kalender**
+- Alle Bandmitglieder dürfen Probetermine eintragen und ändern.
+- Sonst bearbeitet jeder nur seine eigenen Einträge. Der Admin darf alles.
+
+**Wiederholende Termine** (für Reservierungen, Bandproben und Verfügbarkeit)
+- Auswahl: einmalig, wöchentlich, monatlich, jährlich. „Alle 2 Wochen“ wird nicht gebraucht.
+- Ende: nie oder bis zu einem Datum.
+- Monatlich wie im Handy-Kalender: Die App bietet aus dem gewählten Datum automatisch zwei Varianten an, z. B. „Monatlich am 14.“ oder „Monatlich am 2. Samstag“.
+- Beim Ändern fragt die App: „Nur diesen Termin“ oder „Diesen und alle folgenden“. So lässt sich z. B. die Uhrzeit für einzelne Termine anpassen.
+- Einzelne Termine einer Serie können abgesagt werden, ohne die Serie zu löschen.
+
+**Geburtstage**
+- Jeder trägt sein Geburtsdatum freiwillig im Profil ein, auf Wunsch ohne Jahrgang.
+- Der Kalender zeigt Geburtstage jedes Jahr automatisch an, damit man gratulieren kann.
+- Geburtstage von Nicht-Mitgliedern bei Bedarf als normalen jährlichen Termin eintragen.
+- Kommt in Etappe 1.
+
 ## Offene Fragen
 
 Diese Punkte sind noch nicht entschieden. Claude Code soll sie bei der jeweiligen Etappe nachfragen und nicht selbst festlegen.
 
-- [ ] Wer aus der Band trägt die Probetermine ein?
-- [ ] Gibt es neben Krigu weitere Admins?
-- [ ] Login-Art: Anmeldelink per E-Mail oder Passwort?
+- [x] Wer aus der Band trägt die Probetermine ein? → alle aus der Band
+- [x] Gibt es neben Krigu weitere Admins? → nein
+- [x] Login-Art? → Name und eigenes Passwort, siehe „Entscheidungen“
+- [ ] Einladungslinks: ein Link pro Person oder ein Gruppenlink pro Rolle (mehrfach nutzbar, läuft nach einigen Tagen ab)?
+- [ ] Geburtstage: Sieht die Band die Geburtstage der Mitglieder, und tragen Bandmitglieder ihren eigenen ein?
 - [ ] Finanzen: Beträge, Währung, wer darf Einträge machen?
 - [ ] Logo festlegen. Krigu reicht ein besseres Foto vom Schild nach (frontal, in Farbe, Raumlicht aus).
 - [ ] Brett- und Kartenspiele erfassen (macht Krigu)
